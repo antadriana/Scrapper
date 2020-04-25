@@ -10,12 +10,13 @@ namespace WpfClient.Model
   public class Info : INotifyPropertyChanged
     {
 
-        public string Id { get; set; }
+        public string id { get; set; }
         public string name { get; set; }
         // string wide_name;
         public string price { get; set; }
         public string change { get; set; }
         public string perentage_changed { get; set; }
+        public bool like { get; set; }
         //  Type type;
 
         public Info(string name, string price, string change, string percent_change)

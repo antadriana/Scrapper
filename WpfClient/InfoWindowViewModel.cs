@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfClient.Model;
 
 namespace WpfClient
 {
@@ -39,12 +40,12 @@ namespace WpfClient
             InfoList = new ObservableCollection<Model.Info>(infos);
         }
 
-    /*    public void Like(string id, bool like)
+        public void Like(Info inf, bool like)
         {
-            bool? newLike = _newsService.Feedback(id, like);
+            bool newLike = _infoService.Feedback(inf, like);
 
-            var updatedItem = NewsList.Single(x => x.ID == id);
-            updatedItem.Like = newLike;
-        }*/
+            var updatedItem = InfoList.Single(x => x.id == inf.id);
+            updatedItem.like = newLike;
+        }
     }
 }

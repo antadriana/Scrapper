@@ -11,10 +11,12 @@ namespace GraphQLService.Entities
         public InfoInputType()
         {
             Name = "InfoInput";
-            Field<NonNullGraphType<StringGraphType>>("name");
+            Field<NonNullGraphType<StringGraphType>>("id");
+            Field<StringGraphType>("name");
             Field<StringGraphType>("price");
-            Field<StringGraphType>("percent");
+            Field<StringGraphType>("change");
             Field<StringGraphType>("perentage_changed");
+            Field<BooleanGraphType>("like");
         }
     }
 }
