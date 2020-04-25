@@ -173,3 +173,4 @@ C:\Users\Adriana\Desktop\SeleniumScrapper\WpfClient\obj\Debug\WpfClient.csproj.C
 C:\Users\Adriana\Desktop\SeleniumScrapper\WpfClient\obj\Debug\WpfClient.csproj.CopyComplete
 C:\Users\Adriana\Desktop\SeleniumScrapper\WpfClient\obj\Debug\WpfClient.exe
 C:\Users\Adriana\Desktop\SeleniumScrapper\WpfClient\obj\Debug\WpfClient.pdb
+C:\Users\Adriana\Desktop\SeleniumScrapper\WpfClient\obj\Debug\GeneratedInternalTypeHelper.g.cs

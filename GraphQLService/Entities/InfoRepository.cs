@@ -20,15 +20,24 @@ namespace GraphQLService.Entities
         }
 
        public static List<Info> GetAll()
+       {
+            var t = inf.Get();
+            return t;
+       }
+
+        public static Info GetByID(string id)
         {
-            return inf.Get();
+            return inf.GetById(id);
         }
 
         public static Info AddInfo(Info i)
         {
+            return inf.Create(i);           // inf.Get();
+        }
 
-            return inf.Create(i);
-            // inf.Get();
+        public static Info UpdateInfo(string id,Info i)
+        {
+            return inf.Update(id,i);           // inf.Get();
         }
     }
 }

@@ -34,7 +34,8 @@ namespace rummqListener
                     { "name", item.name },
                     {"price", item.price },
                     {"change", item.change },
-                    {"perentage_changed", item.percent_change }
+                    {"perentage_changed", item.percent_change },
+                    {"like" ,false}
                 };
                 collection.InsertOne(document);
             }

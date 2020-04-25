@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfClient.Model;
 
 namespace WpfClient
 {
@@ -36,6 +37,24 @@ namespace WpfClient
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             _infosCollection.View.Refresh();
+        }
+
+        private void FeedbackClick(Info inf, bool like)
+        {
+            _viewModel.Like(inf, like);
+            _viewModel.Update();
+        }
+
+        private void Like_Click(object sender, RoutedEventArgs e)
+        {
+            var n = ((FrameworkElement)sender).DataContext as Model.Info;
+            FeedbackClick(n, true);
+        }
+
+        private void Dislike_Click(object sender, RoutedEventArgs e)
+        {
+            var n = ((FrameworkElement)sender).DataContext as Model.Info;
+            FeedbackClick(n, false);
         }
     }
 }

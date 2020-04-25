@@ -1,6 +1,7 @@
 ﻿using GraphQL.Client;
 using GraphQL.Common.Request;
 using System.Collections.Generic;
+using WpfClient.Model;
 
 namespace WpfClient
 {
@@ -21,9 +22,13 @@ namespace WpfClient
                 Query = @"
                     query { 
                         infos { 
+                          id,
                           name,
                           price,
-                          change
+                          change,
+                          perentage_changed,
+                          like
+                         
                         }
                     }"
             };
@@ -32,22 +37,24 @@ namespace WpfClient
             return news;
         }
 
-        /*public bool? Feedback(string id, bool like)
+        public bool Feedback(Info inf, bool like)
         {
+            string idd = inf.id;
+            inf.like = like;
             var request = new GraphQLRequest()
             {
                 Query = @"
-                    mutation 
-                        feedback($id: String!, $like: Boolean!) {
-                            feedback(id: $id, like: $like){ 
-                                iD, like
-                            }
+                    mutation ($info: InfoInput!, $infoId:ID!)
+                      {
+                        addLike(info:$info, infoId:$infoId)
+                            { 
+                               name                            }
                         }",
-                Variables = new { id = id, like = like }
+                Variables = new { info = inf, infoId = idd }
             };
-            var graphQLResponse = _client.PostAsync(request).Result;
-            var news = graphQLResponse.GetDataFieldAs<Model.News>("feedback");
-            return news.Like;
-        }*/
+                var graphQLResponse = _client.PostAsync(request).Result;
+            var infoo = graphQLResponse.GetDataFieldAs<Model.Info>("addLike");
+            return infoo.like;
+        }
     }
 }
