@@ -1,0 +1,14 @@
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\bin\Debug\netcoreapp2.1\GraphQLService.deps.json
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\bin\Debug\netcoreapp2.1\GraphQLService.runtimeconfig.json
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\bin\Debug\netcoreapp2.1\GraphQLService.runtimeconfig.dev.json
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\bin\Debug\netcoreapp2.1\GraphQLService.dll
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\bin\Debug\netcoreapp2.1\GraphQLService.pdb
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.csproj.CoreCompileInputs.cache
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.RazorAssemblyInfo.cache
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.RazorAssemblyInfo.cs
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.AssemblyInfoInputs.cache
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.AssemblyInfo.cs
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.RazorTargetAssemblyInfo.cache
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.dll
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.pdb
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.csprojAssemblyReference.cache

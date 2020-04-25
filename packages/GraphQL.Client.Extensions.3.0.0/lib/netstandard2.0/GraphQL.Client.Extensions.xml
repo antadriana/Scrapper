@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQL.Client.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:GraphQL.Client.Extensions.GraphQLClientException">
+            <summary>GraphQL Client Exception.</summary>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.Client.Extensions.GraphQLClientException" /> class.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientException.#ctor(GraphQL.Common.Response.GraphQLError[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.Client.Extensions.GraphQLClientException" /> class.
+            </summary>
+            <param name="errors">The GraphQL errors.</param>
+        </member>
+        <member name="T:GraphQL.Client.Extensions.GraphQLClientExtensions">
+            <summary>
+            Extensions for the <see cref="T:GraphQL.Client.GraphQLClient" /> class.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientExtensions.Get``1(GraphQL.Client.GraphQLClient,GraphQL.Query.Builder.IQuery,System.Threading.CancellationToken)">
+            <summary>Send a <see cref="T:GraphQL.Common.Request.GraphQLRequest" /> via GET.</summary>
+            <typeparam name="T">Data Type.</typeparam>
+            <param name="client">The GraphQL Client.</param>
+            <param name="query">The query.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <exception cref="T:System.ArgumentException">Dupe Key, missing parts or empty parts of a query</exception>
+            <exception cref="T:System.ArgumentNullException">Invalid Configuration</exception>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientExtensions.GetBatch(GraphQL.Client.GraphQLClient,GraphQL.Query.Builder.IQuery[],System.Threading.CancellationToken)">
+            <summary>Send a <see cref="T:GraphQL.Common.Request.GraphQLRequest" /> composed of a query batch via GET.</summary>
+            <param name="client">The GraphQL Client.</param>
+            <param name="queries">The query batch.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <exception cref="T:System.ArgumentException">Dupe Key, missing parts or empty parts of a query</exception>
+            <exception cref="T:System.ArgumentNullException">Invalid Configuration</exception>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientExtensions.Post``1(GraphQL.Client.GraphQLClient,GraphQL.Query.Builder.IQuery,System.Threading.CancellationToken)">
+            <summary>Send a <see cref="T:GraphQL.Common.Request.GraphQLRequest" /> via POST.</summary>
+            <typeparam name="T">Data Type.</typeparam>
+            <param name="client">The GraphQL Client.</param>
+            <param name="query">The query.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <exception cref="T:System.ArgumentException">Dupe Key, missing parts or empty parts of a query</exception>
+            <exception cref="T:System.ArgumentNullException">Invalid Configuration</exception>
+        </member>
+        <member name="M:GraphQL.Client.Extensions.GraphQLClientExtensions.PostBatch(GraphQL.Client.GraphQLClient,GraphQL.Query.Builder.IQuery[],System.Threading.CancellationToken)">
+            <summary>Send a <see cref="T:GraphQL.Common.Request.GraphQLRequest" /> composed of a query batch via POST.</summary>
+            <param name="client">The GraphQL Client.</param>
+            <param name="queries">The query batch.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <exception cref="T:System.ArgumentException">Dupe Key, missing parts or empty parts of a query</exception>
+            <exception cref="T:System.ArgumentNullException">Invalid Configuration</exception>
+        </member>
+    </members>
+</doc>

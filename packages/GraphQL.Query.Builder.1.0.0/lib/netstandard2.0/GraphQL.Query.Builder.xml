@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQL.Query.Builder</name>
+    </assembly>
+    <members>
+        <member name="T:GraphQL.Query.Builder.IQuery">
+            <summary>The query interface.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.IQuery.Name">
+            <summary>Gets the query name.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.IQuery.AliasName">
+            <summary>Gets the alias name.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery.Build">
+            <summary>Builds the query.</summary>
+            <returns>The GraphQL query as string, without outer enclosing block.</returns>
+            <exception cref="T:System.ArgumentException">Must have a 'Name' specified in the Query</exception>
+            <exception cref="T:System.ArgumentException">Must have a one or more 'Select' fields in the Query</exception>
+        </member>
+        <member name="T:GraphQL.Query.Builder.IQuery`1">
+            <summary>Query of TSource interface.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.IQuery`1.SelectList">
+            <summary>Gets the select list.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.IQuery`1.Arguments">
+            <summary>Gets the arguments.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.Alias(System.String)">
+            <summary>Sets the query alias name.</summary>
+            <param name="alias">The alias name.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>Adds a field to the query.</summary>
+            <typeparam name="TProperty">The property type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddField(System.String)">
+            <summary>Adds a field to the query.</summary>
+            <param name="field">The field name.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-object field to the query.</summary>
+            <typeparam name="TSubSource">The sub-object type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}},System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-list field to the query.</summary>
+            <typeparam name="TSubSource">The sub-list object type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddField``1(System.String,System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-object field to the query.</summary>
+            <typeparam name="TSubSource">The sub-object type.</typeparam>
+            <param name="field">The field name.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddArgument(System.String,System.Object)">
+            <summary>Adds a new argument to the query.</summary>
+            <param name="key">The argument name.</param>
+            <param name="value">The value.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddArguments(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>Adds arguments to the query.</summary>
+            <param name="arguments">the dictionary argument.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQuery`1.AddArguments``1(``0)">
+            <summary>Adds arguments to the query.</summary>
+            <typeparam name="TArguments">The arguments object type.</typeparam>
+            <param name="arguments">The arguments object.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="T:GraphQL.Query.Builder.IQueryStringBuilder">
+            <summary>The GraphQL query builder interface.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQueryStringBuilder.Clear">
+            <summary>Clears the string builder.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.IQueryStringBuilder.Build``1(GraphQL.Query.Builder.IQuery{``0})">
+            <summary>Builds the query.</summary>
+            <param name="query">The query.</param>
+            <returns>The GraphQL query as string, without outer enclosing block.</returns>
+        </member>
+        <member name="T:GraphQL.Query.Builder.QueryFormatters">
+            <summary>The query formatter class.</summary>
+        </member>
+        <member name="F:GraphQL.Query.Builder.QueryFormatters.CamelCaseFormatter">
+            <summary>The camel case formatter.</summary>
+        </member>
+        <member name="T:GraphQL.Query.Builder.Query`1">
+            <summary>The query class.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.Query`1.SelectList">
+            <summary>Gets the select list.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.Query`1.Arguments">
+            <summary>Gets the arguments.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.Query`1.Name">
+            <summary>Gets the query name.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.Query`1.AliasName">
+            <summary>Gets the alias name.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.Query`1.QueryStringBuilder">
+            <summary>Gets the query string builder.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:GraphQL.Query.Builder.Query`1" /> class.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.#ctor(System.String,GraphQL.Query.Builder.QueryOptions)">
+            <summary>Initializes a new instance of the <see cref="T:GraphQL.Query.Builder.Query`1" /> class.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.Alias(System.String)">
+            <summary>Sets the query alias name.</summary>
+            <param name="alias">The alias name.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>Adds a field to the query.</summary>
+            <typeparam name="TProperty">The property type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddField(System.String)">
+            <summary>Adds a field to the query.</summary>
+            <param name="field">The field name.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-object field to the query.</summary>
+            <typeparam name="TSubSource">The sub-object type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddField``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}},System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-list field to the query.</summary>
+            <typeparam name="TSubSource">The sub-list object type.</typeparam>
+            <param name="selector">The field selector.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddField``1(System.String,System.Func{GraphQL.Query.Builder.IQuery{``0},GraphQL.Query.Builder.IQuery{``0}})">
+            <summary>Adds a sub-object field to the query.</summary>
+            <typeparam name="TSubSource">The sub-object type.</typeparam>
+            <param name="field">The field name.</param>
+            <param name="build">The sub-object query building function.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddArgument(System.String,System.Object)">
+            <summary>Adds a new argument to the query.</summary>
+            <param name="key">The argument name.</param>
+            <param name="value">The value.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddArguments(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>Adds arguments to the query.</summary>
+            <param name="arguments">the dictionary argument.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.AddArguments``1(``0)">
+            <summary>Adds arguments to the query.</summary>
+            <typeparam name="TArguments">The arguments object type.</typeparam>
+            <param name="arguments">The arguments object.</param>
+            <returns>The query.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.Build">
+            <summary>Builds the query.</summary>
+            <returns>The GraphQL query as string, without outer enclosing block.</returns>
+            <exception cref="T:System.ArgumentException">Must have a 'Name' specified in the Query</exception>
+            <exception cref="T:System.ArgumentException">Must have a one or more 'Select' fields in the Query</exception>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.GetPropertyInfo``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>Gets property infos from lambda.</summary>
+            <param name="lambda">The lambda.</param>
+            <typeparam name="TProperty">The property.</typeparam>
+            <returns>The property infos.</returns>
+        </member>
+        <member name="M:GraphQL.Query.Builder.Query`1.GetPropertyName(System.Reflection.PropertyInfo)">
+            <summary>Tries to get property name from JSON property attribute or from optional formater.</summary>
+            <param name="property">The property.</param>
+            <returns>The property name.</returns>
+        </member>
+        <member name="T:GraphQL.Query.Builder.QueryOptions">
+            <summary>The query options class.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.QueryOptions.Formatter">
+            <summary>Gets or sets the formatter.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.QueryOptions.QueryStringBuilderFactory">
+            <summary>Gets or sets the query string builder factory.</summary>
+        </member>
+        <member name="T:GraphQL.Query.Builder.QueryStringBuilder">
+            <summary>The GraphQL query builder class.</summary>
+        </member>
+        <member name="P:GraphQL.Query.Builder.QueryStringBuilder.QueryString">
+            <summary>The query string builder.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.QueryStringBuilder.Clear">
+            <summary>Clears the string builder.</summary>
+        </member>
+        <member name="M:GraphQL.Query.Builder.QueryStringBuilder.FormatQueryParam(System.Object)">
+            <summary>
+            Formats query param.
+            
+            Returns:
+            - String: `"value"`
+            - Number: `10`
+            - Boolean: `true` / `false`
+            - Enum: `EnumValue`
+            - Key value pair: `key:"value"` / `key:10`
+            - List: `["value1","value2"]` / `[1,2]`
+            - Dictionary: `{a:"value",b:10}`
+            </summary>
+            <param name="value"></param>
+            <returns>The formatted query param.</returns>
+            <exception cref="T:System.IO.InvalidDataException">Invalid Object Type in Param List</exception>
+        </member>
+        <member name="M:GraphQL.Query.Builder.QueryStringBuilder.AddParams``1(GraphQL.Query.Builder.IQuery{``0})">
+            <summary>Adds query params to the query string.</summary>
+            <param name="query">The query.</param>
+        </member>
+        <member name="M:GraphQL.Query.Builder.QueryStringBuilder.AddFields``1(GraphQL.Query.Builder.IQuery{``0})">
+            <summary>Adds fields to the query sting.</summary>
+            <param name="query">The query.</param>
+            <exception cref="T:System.ArgumentException">Invalid Object in Field List</exception>
+        </member>
+        <member name="M:GraphQL.Query.Builder.QueryStringBuilder.Build``1(GraphQL.Query.Builder.IQuery{``0})">
+            <summary>Builds the query.</summary>
+            <param name="query">The query.</param>
+            <returns>The GraphQL query as string, without outer enclosing block.</returns>
+        </member>
+    </members>
+</doc>

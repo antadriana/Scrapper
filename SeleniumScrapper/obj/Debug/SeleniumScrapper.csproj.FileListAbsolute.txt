@@ -23,3 +23,4 @@ C:\Users\Adriana\Desktop\SeleniumScrapper\SeleniumScrapper\obj\Debug\SeleniumScr
 C:\Users\Adriana\Desktop\SeleniumScrapper\SeleniumScrapper\obj\Debug\SeleniumScrapper.csproj.CopyComplete
 C:\Users\Adriana\Desktop\SeleniumScrapper\SeleniumScrapper\obj\Debug\SeleniumScrapper.exe
 C:\Users\Adriana\Desktop\SeleniumScrapper\SeleniumScrapper\obj\Debug\SeleniumScrapper.pdb
+C:\Users\Adriana\Desktop\SeleniumScrapper\SeleniumScrapper\obj\Debug\SeleniumScrapper.csprojAssemblyReference.cache

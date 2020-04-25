@@ -130,3 +130,4 @@ C:\Users\Adriana\Desktop\SeleniumScrapper\rummqListener\bin\Debug\Newtonsoft.Jso
 C:\Users\Adriana\Desktop\SeleniumScrapper\rummqListener\bin\Debug\Newtonsoft.Json.Bson.dll
 C:\Users\Adriana\Desktop\SeleniumScrapper\rummqListener\bin\Debug\Newtonsoft.Json.Bson.pdb
 C:\Users\Adriana\Desktop\SeleniumScrapper\rummqListener\bin\Debug\Newtonsoft.Json.Bson.xml
+C:\Users\Adriana\Desktop\SeleniumScrapper\rummqListener\obj\Debug\rummqListener.csprojAssemblyReference.cache

@@ -1,0 +1,1888 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawn.Guard</name>
+    </assembly>
+    <members>
+        <member name="T:Dawn.Guard">
+            <content>Provides preconditions for <see cref="T:System.Boolean" /> arguments.</content>
+            <summary>Validates argument preconditions.</summary>
+            <content>Provides preconditions for <see cref="T:System.Enum" /> arguments.</content>
+            <content>Provides preconditions for <see cref="T:System.IComparable" /> arguments.</content>
+            <content>Provides preconditions for <see cref="T:System.Collections.IEnumerable" /> arguments.</content>
+            <content>Provides preconditions for <see cref="T:System.IEquatable`1" /> arguments.</content>
+            <content>Provides utilities to support legacy frameworks.</content>
+            <content>Provides error messages for the common preconditions.</content>
+            <content>Provides safe modification functions to normalize arguments.</content>
+            <content>Nullness preconditions.</content>
+            <content>Provides preconditions for <see cref="T:System.String" /> arguments.</content>
+            <content>Provides type preconditions.</content>
+            <content>Provides preconditions for <see cref="T:System.Uri" /> arguments.</content>
+        </member>
+        <member name="M:Dawn.Guard.True(Dawn.Guard.ArgumentInfo{System.Boolean}@,System.String)">
+            <summary>Requires the boolean argument to be <c>true</c>.</summary>
+            <param name="argument">The boolean argument.</param>
+            <param name="message">
+                The message of the exception that will be thrown
+                if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>false</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.True(Dawn.Guard.ArgumentInfo{System.Nullable{System.Boolean}}@,System.String)">
+            <summary>
+                Requires the nullable boolean argument
+                to be <c>true</c> or <c>null</c>.
+            </summary>
+            <param name="argument">The boolean argument.</param>
+            <param name="message">
+                The message of the exception that will be thrown
+                if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>false</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.False(Dawn.Guard.ArgumentInfo{System.Boolean}@,System.String)">
+            <summary>Requires the boolean argument to be <c>false</c>.</summary>
+            <param name="argument">The boolean argument.</param>
+            <param name="message">
+                The message of the exception that will be thrown
+                if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>true</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.False(Dawn.Guard.ArgumentInfo{System.Nullable{System.Boolean}}@,System.String)">
+            <summary>
+                Requires the nullable boolean argument
+                to be <c>false</c> or <c>null</c>.
+            </summary>
+            <param name="argument">The boolean argument.</param>
+            <param name="message">
+                The message of the exception that will be thrown
+                if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>true</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Argument``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+                Returns an object that can be used to assert preconditions
+                for the specified method argument.
+            </summary>
+            <typeparam name="T">The type of the method argument.</typeparam>
+            <param name="e">An expression that specifies a method argument.</param>
+            <returns>An object used for asserting preconditions.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="e" /> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="e" /> is not a <see cref="T:System.Linq.Expressions.MemberExpression" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Argument``1(``0,System.String)">
+            <summary>
+                Returns an object that can be used to assert preconditions
+                for the method argument with the specified name and value.
+            </summary>
+            <typeparam name="T">The type of the method argument.</typeparam>
+            <param name="value">The value of the method argument.</param>
+            <param name="name">
+                <para>
+                    The name of the method argument. Use the <c>nameof</c>
+                    operator (<c>Nameof</c> in Visual Basic) where possible.
+                </para>
+                <para>
+                    It is highly recommended you don't left this value
+                    <c>null</c> so the arguments violating the
+                    preconditions can be easily identified.
+                </para>
+            </param>
+            <returns>An object used for asserting preconditions.</returns>
+        </member>
+        <member name="T:Dawn.Guard.ArgumentInfo`1">
+            <summary>Represents a method argument.</summary>
+            <typeparam name="T">The type of the method argument.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.ArgumentInfo`1.hasValue">
+            <summary>
+                A function that determines whether a specified instance
+                of type <typeparamref name="T" /> is not <c>null</c>.
+            </summary>
+        </member>
+        <member name="F:Dawn.Guard.ArgumentInfo`1.defaultName">
+            <summary>
+                The default name for the arguments
+                of type <typeparamref name="T" />.
+            </summary>
+        </member>
+        <member name="F:Dawn.Guard.ArgumentInfo`1.name">
+            <summary>The argument name.</summary>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.#ctor(`0,System.String,System.Boolean)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Dawn.Guard.ArgumentInfo`1"/> struct.
+            </summary>
+            <param name="value">The value of the method argument.</param>
+            <param name="name">The name of the method argument.</param>
+            <param name="modified">
+                Whether the original method argument is modified
+                before the initialization of this instance.
+            </param>
+        </member>
+        <member name="P:Dawn.Guard.ArgumentInfo`1.Value">
+            <summary>Gets the argument value.</summary>
+        </member>
+        <member name="P:Dawn.Guard.ArgumentInfo`1.Name">
+            <summary>Gets the argument name.</summary>
+        </member>
+        <member name="P:Dawn.Guard.ArgumentInfo`1.Modified">
+            <summary>
+                Gets a value indicating whether the the original
+                method argument is modified before the
+                initialization of this instance.
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.op_Implicit(Dawn.Guard.ArgumentInfo{`0})~`0">
+            <summary>Gets the value of an argument.</summary>
+            <param name="argument">The argument whose value to return.</param>
+            <returns><see cref="P:Dawn.Guard.ArgumentInfo`1.Value" />.</returns>
+        </member>
+        <member name="T:Dawn.Guard.ArgumentInfo`1.IsNotNull">
+            <summary>
+                A delegate that checks whether an instance of
+                <typeparamref name="T" /> is not <c>null</c>.
+            </summary>
+            <param name="value">The value to check against <c>null</c>.</param>
+            <returns>
+                <c>true</c>, if <paramref name="value" /> is
+                not <c>null</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.Require(System.Func{`0,System.Boolean},System.Func{`0,System.String})">
+            <summary>Requires the argument to satisfy a condition.</summary>
+            <param name="predicate">The function to test the the argument value.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current argument.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="predicate" /> returned <c>false</c>
+                when supplied the <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.Require``1(System.Func{`0,System.Boolean},System.Func{`0,System.String})">
+            <summary>
+                Requires the argument to satisfy a condition and throws the
+                specified type of exception if the condition is not met.
+            </summary>
+            <typeparam name="TException">
+                The type of the exception to throw if the argument
+                does not satisfy the specified condition.
+            </typeparam>
+            <param name="predicate">The function to test the the argument value.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current argument.</returns>
+            <exception cref="T:System.Exception">
+                <paramref name="predicate" /> returned <c>false</c>
+                when supplied the <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" />.
+                The exception thrown is an instance of
+                type <typeparamref name="TException" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.Compatible``1(System.Func{`0,System.String})">
+            <summary>
+                Requires the argument to have a value that can be
+                assigned to an instance of the specified type.
+            </summary>
+            <typeparam name="TTarget">
+                The type that the argument's value should be assignable to.
+            </typeparam>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current argument.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" /> cannot be assigned
+                to type <typeparamref name="TTarget" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.NotCompatible``1(System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that cannot
+                be assigned to an instance of the specified type.
+            </summary>
+            <typeparam name="TTarget">
+                The type that the argument's value should be unassignable to.
+            </typeparam>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current argument.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" /> can be assigned
+                to type <typeparamref name="TTarget" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.Cast``1(System.Func{`0,System.String})">
+            <summary>
+                <para>
+                    Requires the argument to have a value that can be
+                    assigned to an instance of the specified type.
+                </para>
+                <para>
+                    The return value will be a new argument
+                    of type <typeparamref name="TTarget" />.
+                </para>
+            </summary>
+            <typeparam name="TTarget">
+                The type that the argument's value should be assignable to.
+            </typeparam>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" /> cannot be assigned
+                to type <typeparamref name="TTarget" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.HasValue">
+            <summary>Determines whether the argument value is not <c>null</c>.</summary>
+            <returns>
+                <c>true</c>, if <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" /> is
+                not <c>null</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.IsNull">
+            <summary>Determines whether the argument value is <c>null</c>.</summary>
+            <returns>
+                <c>true</c>, if <see cref="P:Dawn.Guard.ArgumentInfo`1.Value" /> is
+                <c>null</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.ArgumentInfo`1.InitHasValue">
+            <summary>Initializes <see cref="F:Dawn.Guard.ArgumentInfo`1.hasValue" />.</summary>
+            <returns>
+                A function that determines whether a specified instance
+                of type <typeparamref name="T" /> is not <c>null</c>.
+            </returns>
+        </member>
+        <member name="T:Dawn.Guard.Exception`1">
+            <summary>
+                Initializes exceptions of type <typeparamref name="T" />
+                for failed preconditions.
+            </summary>
+            <typeparam name="T">The exception type.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.Exception`1.Factory">
+            <summary>
+                Initializes an exception of type <typeparamref name="T" />
+                using the specified parameter name and error message.
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.Exception`1.InitFactory">
+            <summary>Initializes <see cref="F:Dawn.Guard.Exception`1.Factory" />.</summary>
+            <returns>A function that initializes exceptions.</returns>
+        </member>
+        <member name="M:Dawn.Guard.Enum``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>Exposes the enum preconditions.</summary>
+            <typeparam name="T">Type of the enum argument.</typeparam>
+            <param name="argument">The enum argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the argument type is not an enum.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.EnumArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is not an enum.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Enum``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>Exposes the nullable enum preconditions.</summary>
+            <typeparam name="T">Type of the enum argument.</typeparam>
+            <param name="argument">The enum argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the argument type is not an enum.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.NullableEnumArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is not an enum.
+            </exception>
+        </member>
+        <member name="T:Dawn.Guard.EnumArgumentInfo`1">
+            <summary>Represents a method argument with an enumeration value.</summary>
+            <typeparam name="T">The type of the enum.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.EnumArgumentInfo`1.hasFlag">
+            <summary>
+                A function that checks whether an enum
+                value has the specified flag bits set.
+            </summary>
+        </member>
+        <member name="F:Dawn.Guard.EnumArgumentInfo`1.values">
+            <summary>
+                Contains all the enum values defined
+                for type <typeparamref name="T" />
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.#ctor(Dawn.Guard.ArgumentInfo{`0})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Dawn.Guard.EnumArgumentInfo`1" /> struct.
+            </summary>
+            <param name="argument">The original argument.</param>
+        </member>
+        <member name="P:Dawn.Guard.EnumArgumentInfo`1.Argument">
+            <summary>Gets the original argument.</summary>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.op_Implicit(Dawn.Guard.EnumArgumentInfo{`0})~`0">
+            <summary>Gets the value of an enum argument.</summary>
+            <param name="argument">The argument whose value to return.</param>
+            <returns>The value of <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" />.</returns>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.Defined(System.Func{`0,System.String})">
+            <summary>
+                Requires the enum argument to be a defined member
+                of the enum type <typeparamref name="T" />.
+            </summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> value is not a defined member
+                of the enum type <typeparamref name="T" />.
+            </exception>
+            <returns>The current instance.</returns>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.None(System.Func{`0,System.String})">
+            <summary>Requires the enum argument to have none of its bits set.</summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> value has one or more of its bits set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.NotNone(System.Func{`0,System.String})">
+            <summary>
+                Requires the enum argument to have at least one of its bits set.
+            </summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> value has none of its bits set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.Equal(`0,System.Func{`0,`0,System.String})">
+            <summary>Requires the enum argument to have the specified value.</summary>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> value is different
+                than <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.NotEqual(`0,System.Func{`0,System.String})">
+            <summary>
+                Requires the enum argument to have a value
+                is different than the specified value.
+            </summary>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> value is equal to <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.HasFlag(`0,System.Func{`0,`0,System.String})">
+            <summary>
+                Requires the enum argument to have
+                the specified flag bits set.
+            </summary>
+            <param name="flag">The flags to check.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> does not have the bits
+                specified in <paramref name="flag" /> set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.DoesNotHaveFlag(`0,System.Func{`0,`0,System.String})">
+            <summary>
+                Requires the enum argument to have
+                the specified flag bits unset.
+            </summary>
+            <param name="flag">The flags to check.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.EnumArgumentInfo`1.Argument" /> have the bits specified
+                in <paramref name="flag" /> set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.EnumArgumentInfo`1.InitHasFlag">
+            <summary>Initializes <see cref="F:Dawn.Guard.EnumArgumentInfo`1.hasFlag" />.</summary>
+            <returns>
+                A function that checks whether an enum
+                value has the specified flag bits set.
+            </returns>
+        </member>
+        <member name="T:Dawn.Guard.NullableEnumArgumentInfo`1">
+            <summary>Represents a method argument with a nullable enumeration value.</summary>
+            <typeparam name="T">The type of the enum.</typeparam>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.#ctor(Dawn.Guard.ArgumentInfo{System.Nullable{`0}})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Dawn.Guard.NullableEnumArgumentInfo`1" /> struct.
+            </summary>
+            <param name="argument">The original argument.</param>
+        </member>
+        <member name="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument">
+            <summary>Gets the original argument.</summary>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.op_Implicit(Dawn.Guard.NullableEnumArgumentInfo{`0})~System.Nullable{`0}">
+            <summary>Gets the value of a nullable enum argument.</summary>
+            <param name="argument">The argument whose value to return.</param>
+            <returns>The value of <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" />.</returns>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.Null(System.Func{`0,System.String})">
+            <summary>Requires the nullable enum argument to be <c>null</c>.</summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.NotNull(System.String)">
+            <summary>
+                Requires the nullable enum argument to be not <c>null</c>.
+            </summary>
+            <param name="message">
+                The message of the exception that will be thrown
+                if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is <c>null</c> and the
+                argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is <c>null</c> and
+                the argument is modified after its initialization.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.Defined(System.Func{`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to be
+                either a defined member of the enum type
+                <typeparamref name="T" /> or <c>null</c>.
+            </summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c> and is not
+                a defined member of the enum type <typeparamref name="T" />.
+            </exception>
+            <returns>The current instance.</returns>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.None(System.Func{`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to either
+                have none of its bits set or be <c>null</c>.
+            </summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c>
+                and has one or more of its bits set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.NotNone(System.Func{`0,System.String})">
+            <summary>
+                Requires the enum argument to have at least one of its bits set.
+            </summary>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c>
+                and has none of its bits set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.Equal(`0,System.Func{`0,`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to either
+                have the specified value or be <c>null</c>.
+            </summary>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c>
+                and is different than <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.NotEqual(`0,System.Func{`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to have a value that
+                is either different than the specified value or <c>null</c>.
+            </summary>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> value is not <c>null</c>
+                and is equal to <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.HasFlag(`0,System.Func{`0,`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to either have
+                the specified flag bits set or be <c>null</c>.
+            </summary>
+            <param name="flag">The flags to check.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> is not <c>null</c> and does not
+                have the bits specified in <paramref name="flag" /> set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.DoesNotHaveFlag(`0,System.Func{`0,`0,System.String})">
+            <summary>
+                Requires the nullable enum argument to either have
+                the specified flag bits unset or be <c>null</c>.
+            </summary>
+            <param name="flag">The flags to check.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>The current instance.</returns>
+            <exception cref="T:System.ArgumentException">
+                <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> is not <c>null</c> and have
+                the bits specified in <paramref name="flag" /> set.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NullableEnumArgumentInfo`1.NotNull(Dawn.Guard.EnumArgumentInfo{`0}@)">
+            <summary>
+                Initializes an <see cref="T:Dawn.Guard.EnumArgumentInfo`1" />
+                if the <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> is not <c>null</c>.
+                A return value indicates whether the new argument is created.
+            </summary>
+            <param name="result">
+                The new enum argument, if the <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" /> is
+                not <c>null</c>; otherwise, the uninitialized argument.
+            </param>
+            <returns>
+                <c>true</c>, if the <see cref="P:Dawn.Guard.NullableEnumArgumentInfo`1.Argument" />
+                is not <c>null</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.Min``1(Dawn.Guard.ArgumentInfo{``0}@,``0@,System.Func{``0,``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is
+                equal to or greater than a specified value.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="minValue">
+                The minimum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is less than
+                <paramref name="minValue" /> and the argument is
+                not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is less than
+                <paramref name="minValue" /> and the argument
+                is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Min``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,``0@,System.Func{``0,``0,System.String})">
+            <summary>
+                Requires the nullable argument to have a value that is
+                <c>null</c>, equal to the specified value, or greater
+                than the specified value.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="minValue">
+                The minimum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is less than
+                <paramref name="minValue" /> and the argument is
+                not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is less than
+                <paramref name="minValue" /> and the argument
+                is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Max``1(Dawn.Guard.ArgumentInfo{``0}@,``0@,System.Func{``0,``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is
+                equal to or lower than a specified value.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="maxValue">
+                The maximum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is greater than
+                <paramref name="maxValue" /> and the argument is
+                not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is greater than
+                <paramref name="maxValue" /> and the argument
+                is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Max``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,``0@,System.Func{``0,``0,System.String})">
+            <summary>
+                Requires the nullable argument to have a value that is
+                <c>null</c>, equal to the specified value, or lower
+                than the specified value.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="maxValue">
+                The maximum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is greater than
+                <paramref name="maxValue" /> and the argument is
+                not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is greater than
+                <paramref name="maxValue" /> and the argument
+                is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.InRange``1(Dawn.Guard.ArgumentInfo{``0}@,``0@,``0@,System.Func{``0,``0,``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is between
+                the specified minimum and maximum values.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="minValue">
+                The minimum value that the argument is allowed to have.
+            </param>
+            <param name="maxValue">
+                The maximum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is not between
+                <paramref name="minValue"/> and <paramref name="maxValue"/>.
+                And the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not between
+                <paramref name="minValue"/> and <paramref name="maxValue"/>.
+                And the argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.InRange``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,``0@,``0@,System.Func{``0,``0,``0,System.String})">
+            <summary>
+                Requires the nullable argument to have a value that is either
+                between the specified minimum and maximum values or <c>null</c>.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="minValue">
+                The minimum value that the argument is allowed to have.
+            </param>
+            <param name="maxValue">
+                The maximum value that the argument is allowed to have.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is not <c>null</c> and is not
+                between <paramref name="minValue"/> and <paramref name="maxValue"/>.
+                And the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c> and is not
+                between <paramref name="minValue"/> and <paramref name="maxValue"/>.
+                And the argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Zero``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>Requires the argument value to be zero.</summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is not zero and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not zero and
+                the argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Zero``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>
+                Requires the nullable argument to have a
+                value that is either zero or <c>null</c>.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is not zero and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not zero and
+                the argument is modified after its initialization
+            </exception>
+            <remarks>
+                The argument value that is passed to <paramref name="message" />
+                cannot be <c>null</c>, but it is defined as nullable anyway.
+                This is because passing a lambda would cause the calls
+                to be ambiguous between this method and its overload
+                when the message delegate accepts a non-nullable argument.
+            </remarks>
+        </member>
+        <member name="M:Dawn.Guard.NotZero``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>Requires the argument to have a value that is not zero.</summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero and the
+                argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero and the
+                argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotZero``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>
+                Requires the nullable argument to have a value
+                that either is not zero or is <c>null</c>.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero and the
+                argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero and the
+                argument is modified after its initialization
+            </exception>
+            <remarks>
+                The argument value that is passed to <paramref name="message" />
+                cannot be <c>null</c>, but it is defined as nullable anyway.
+                This is because passing a lambda would cause the calls
+                to be ambiguous between this method and its overload
+                when the message delegate accepts a non-nullable argument.
+            </remarks>
+        </member>
+        <member name="M:Dawn.Guard.Positive``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is greater than zero.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero or less, and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero or less, and
+                the argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Positive``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>
+                Requires the argument to have a value that
+                is either greater than zero or <c>null</c>.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero or less, and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero or less, and
+                the argument is modified after its initialization
+            </exception>
+            <remarks>
+                The argument value that is passed to <paramref name="message" />
+                cannot be <c>null</c>, but it is defined as nullable anyway.
+                This is because passing a lambda would cause the calls
+                to be ambiguous between this method and its overload
+                when the message delegate accepts a non-nullable argument.
+            </remarks>
+        </member>
+        <member name="M:Dawn.Guard.Negative``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is less than zero.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero or greater,
+                and the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero or greater,
+                and the argument is modified after its initialization
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Negative``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>
+                Requires the nullable argument to have a value
+                that is either less than zero or <c>null</c>.
+            </summary>
+            <typeparam name="T">The type of the comparable argument.</typeparam>
+            <param name="argument">The comparable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="argument" /> value is zero or greater,
+                and the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is zero or greater,
+                and the argument is modified after its initialization
+            </exception>
+            <remarks>
+                The argument value that is passed to <paramref name="message" />
+                cannot be <c>null</c>, but it is defined as nullable anyway.
+                This is because passing a lambda would cause the calls
+                to be ambiguous between this method and its overload
+                when the message delegate accepts a non-nullable argument.
+            </remarks>
+        </member>
+        <member name="M:Dawn.Guard.Empty``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a collection value that is empty.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> has one or more items.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotEmpty``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a
+                collection value that is not empty.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> is not <c>null</c> and has no items.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.MinCount``1(Dawn.Guard.ArgumentInfo{``0}@,System.Int32,System.Func{``0,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a collection value that
+                contains at least the specified number of items.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="minCount">
+                The minimum number of items the the
+                argument value is allowed to contain.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> contains less
+                than the specified number of items.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.MaxCount``1(Dawn.Guard.ArgumentInfo{``0}@,System.Int32,System.Func{``0,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a collection value that does
+                not contain more than the specified number of items.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="maxCount">
+                The maximum number of items the argument
+                value is allowed to contain.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> contains more
+                than the specified number of items.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.CountInRange``1(Dawn.Guard.ArgumentInfo{``0}@,System.Int32,System.Int32,System.Func{``0,System.Int32,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a collection value whose number
+                of items is between the specified minimum and maximum values.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="minCount">
+                The minimum number of items the argument
+                value is allowed to contain.
+            </param>
+            <param name="maxCount">
+                The maximum number of items the argument
+                value is allowed to contain.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                The number of items that the <paramref name="argument" />
+                contains is either less than <paramref name="minCount" />
+                or greater than <paramref name="maxCount" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Contains``2(Dawn.Guard.ArgumentInfo{``0}@,``1@,System.Func{``0,``1,System.String})">
+            <summary>
+                Requires the argument to have a collection
+                value that contains the specified item.
+            </summary>
+            <typeparam name="TCollection">The type of the collection.</typeparam>
+            <typeparam name="TItem">The type of the collection items.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="item">
+                The item that the argument value is required to contain.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> does not
+                contain <paramref name="item" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.DoesNotContain``2(Dawn.Guard.ArgumentInfo{``0}@,``1@,System.Func{``0,``1,System.String})">
+            <summary>
+                Requires the argument to have a collection value
+                that does not contain the specified item.
+            </summary>
+            <typeparam name="TCollection">The type of the collection.</typeparam>
+            <typeparam name="TItem">The type of the collection items.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="item">
+                The item that the argument value is required not to contain.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> contains <paramref name="item" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.ContainsNull``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a collection
+                value that contains a <c>null</c> element.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> does not contain <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.DoesNotContainNull``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a collection value
+                that does not contain a <c>null</c> element.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+            <param name="argument">The collection argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> contains <c>null</c>.
+            </exception>
+        </member>
+        <member name="T:Dawn.Guard.Collection`1">
+            <summary>
+                Provides cached collection utilities for
+                the type <typeparamref name="T" />.
+            </summary>
+            <typeparam name="T">The type of the collection.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.Collection`1.Count">
+            <summary>
+                <para>
+                    A function that returns the number of
+                    elements in the specified collection.
+                </para>
+                <para>
+                    It enumerates the collection and counts the elements if
+                    the collection does not provide a Count/Length property.
+                    The integer parameter specifies the maximum number of iterations.
+                </para>
+            </summary>
+        </member>
+        <member name="F:Dawn.Guard.Collection`1.ContainsNull">
+            <summary>
+                <para>
+                    A function that returns a value that indicates whether
+                    the specified collection contains a <c>null</c> element.
+                </para>
+                <para>
+                    It enumerates the collection and checks the elements one
+                    by one if the collection does not provide a Contains
+                    method that accepts a single, nullable argument.
+                </para>
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.Collection`1.InitCount">
+            <summary>Initializes <see cref="F:Dawn.Guard.Collection`1.Count" />.</summary>
+            <returns>
+                A function that returns the number of
+                elements in the specified collection.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.Collection`1.InitContainsNull">
+            <summary>Initializes <see cref="F:Dawn.Guard.Collection`1.ContainsNull" />.</summary>
+            <returns>
+                A function that returns a value that indicates whether
+                the specified collection contains a <c>null</c> element.
+            </returns>
+        </member>
+        <member name="T:Dawn.Guard.Collection`2">
+            <summary>
+                Provides cached utilities for <typeparamref name="TItem" /> collections.
+            </summary>
+            <typeparam name="TCollection">The type of the collection.</typeparam>
+            <typeparam name="TItem">The type of the collection items.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.Collection`2.Contains">
+            <summary>
+                A function that determines whether a generic
+                collection contains the specified element.
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.Collection`2.InitContains">
+            <summary>Initializes <see cref="F:Dawn.Guard.Collection`2.Contains" />.</summary>
+            <returns>
+                A function that determines whether a generic
+                collection contains the specified element.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.Default``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have default
+                value of type <typeparamref name="T" />.
+            </summary>
+            <typeparam name="T">The type of the equatable argument.</typeparam>
+            <param name="argument">The equatable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> does not have the
+                default value of type <typeparamref name="T" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotDefault``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is not
+                the default value of type <typeparamref name="T" />.
+            </summary>
+            <typeparam name="T">The type of the equatable argument.</typeparam>
+            <param name="argument">The equatable argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> have the default
+                value of type <typeparamref name="T" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Equal``1(Dawn.Guard.ArgumentInfo{``0}@,``0@,System.Func{``0,``0,System.String})">
+            <summary>Requires the argument to have the specified value.</summary>
+            <typeparam name="T">The type of the equatable argument.</typeparam>
+            <param name="argument">The equatable argument.</param>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is
+                different than <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotEqual``1(Dawn.Guard.ArgumentInfo{``0}@,``0@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that
+                is different than the specified value.
+            </summary>
+            <typeparam name="T">The type of the equatable argument.</typeparam>
+            <param name="argument">The equatable argument.</param>
+            <param name="other">The value to compare the argument value to.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref = "T:System.ArgumentException" >
+                <paramref name="argument" /> value is
+                equal to <paramref name="other" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.IsValueType(System.Type)">
+            <summary>Determines whether the specified type is a value type.</summary>
+            <param name="type">The type to check.</param>
+            <returns>
+                <c>true</c>, if <paramref name="type" /> represents
+                a value type; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.IsGenericType(System.Type,System.Type)">
+            <summary>Determines whether the specified type is a generic type.</summary>
+            <param name="type">The type to check.</param>
+            <param name="definition">The type definition.</param>
+            <returns>
+                <c>true</c>, if <paramref name="type" /> represents a generic
+                type with the specified definition; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.IsEnum(System.Type)">
+            <summary>Determines whether the specified type is an enum.</summary>
+            <param name="type">The type to check.</param>
+            <returns>
+                <c>true</c>, if <paramref name="type" /> represents
+                an enumeration; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.GetBaseType(System.Type)">
+            <summary>Returns the type from wich the specified type directly inherits.</summary>
+            <param name="type">The type whose base type to return.</param>
+            <returns>
+                The type from wich the <paramref name="type" /> directly inherits,
+                if there is one; otherwise, <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.GetPropertyGetter(System.Type,System.String)">
+            <summary>Returns the getter of the property with the specified name.</summary>
+            <param name="type">The type that the property belongs to.</param>
+            <param name="name">The name of the property.</param>
+            <returns>
+                The getter of the property with the specified name, if it can be
+                found in <paramref name="type" />; otherwise, <c>null</c>.
+            </returns>
+        </member>
+        <member name="T:Dawn.Guard.Array`1">
+            <summary>Provides a cached, empty array.</summary>
+            <typeparam name="T">The type of the array.</typeparam>
+        </member>
+        <member name="P:Dawn.Guard.Array`1.Empty">
+            <summary>Gets an empty array.</summary>
+        </member>
+        <member name="M:Dawn.Guard.Modify``1(Dawn.Guard.ArgumentInfo{``0}@,``0)">
+            <summary>
+                Returns a new argument with the same name and the specified value.
+            </summary>
+            <typeparam name="T">The type of the argument.</typeparam>
+            <param name="argument">The existing argument.</param>
+            <param name="value">The new argument value.</param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+        </member>
+        <member name="M:Dawn.Guard.Modify``2(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,``1})">
+            <summary>
+                Returns a new argument with the same name and a value that
+                is created using the specified conversion function.
+            </summary>
+            <typeparam name="TSource">The type of the existing argument.</typeparam>
+            <typeparam name="TTarget">The type of the new argument.</typeparam>
+            <param name="argument">The existing argument.</param>
+            <param name="convert">
+                A function that accepts the existing argument's value and
+                returns a new object to be used as the new argument's value.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="convert" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Wrap``2(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,``1},System.Func{``0,System.String})">
+            <summary>
+                <para>
+                    Returns a new argument with the same name and a value that
+                    is created using the specified conversion function.
+                </para>
+                <para>
+                    If the conversion function throws an exception, it will
+                    be wrapped in an <see cref="T:System.ArgumentException" />.
+                </para>
+            </summary>
+            <typeparam name="TSource">The type of the existing argument.</typeparam>
+            <typeparam name="TTarget">The type of the new argument.</typeparam>
+            <param name="argument">The existing argument.</param>
+            <param name="convert">
+                A function that accepts the existing argument's value and
+                returns a new object to be used as the new argument's value.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception
+                that will be thrown if the conversion function fails.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="convert" /> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="convert" /> threw an exception.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Clone``1(Dawn.Guard.ArgumentInfo{``0}@)">
+            <summary>
+                Returns a new argument with the same name
+                and a shallow clone of the original value.
+            </summary>
+            <typeparam name="T">The type of the cloneable argument.</typeparam>
+            <param name="argument">The cloneable argument.</param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+        </member>
+        <member name="M:Dawn.Guard.Null``1(Dawn.Guard.ArgumentInfo{``0}@,System.Func{``0,System.String})">
+            <summary>Requires the argument to be <c>null</c>.</summary>
+            <typeparam name="T">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> is not <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Null``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.Func{System.Nullable{``0},System.String})">
+            <summary>Requires the nullable argument to be <c>null</c>.</summary>
+            <typeparam name="T">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> is not <c>null</c>.
+            </exception>
+            <remarks>
+                The argument value that is passed to <paramref name="message" />
+                cannot be <c>null</c>, but it is defined as nullable anyway.
+                This is because passing a lambda would cause the calls
+                to be ambiguous between this method and its overload
+                when the message delegate accepts a non-nullable argument.
+            </remarks>
+        </member>
+        <member name="M:Dawn.Guard.NotNull``1(Dawn.Guard.ArgumentInfo{``0}@,System.String)">
+            <summary>Requires the argument to not be <c>null</c>.</summary>
+            <typeparam name="T">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="argument" /> value is <c>null</c> and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>null</c> and
+                the argument is modified after its initialization.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotNull``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,System.String)">
+            <summary>Requires the nullable argument to not be <c>null</c>.</summary>
+            <typeparam name="T">The type of the argument.</typeparam>
+            <param name="argument">The argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="argument" /> value is <c>null</c> and
+                the argument is not modified since it is initialized.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is <c>null</c> and
+                the argument is modified after its initialization.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotNull``1(Dawn.Guard.ArgumentInfo{System.Nullable{``0}}@,Dawn.Guard.ArgumentInfo{``0}@)">
+            <summary>
+                Initializes a new <see cref="T:Dawn.Guard.ArgumentInfo`1" />
+                if the argument value is not <c>null</c>.
+                A return value indicates whether the new argument is created.
+            </summary>
+            <param name="argument">The argument.</param>
+            <param name="result">
+                The new argument, if <paramref name="argument" /> is
+                not <c>null</c>; otherwise, the uninitialized argument.
+            </param>
+            <returns>
+                <c>true</c>, if the <paramref name="argument" />
+                is not <c>null</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Dawn.Guard.Empty(Dawn.Guard.ArgumentInfo{System.String}@,System.Func{System.String,System.String})">
+            <summary>Requires the argument to have an empty string value.</summary>
+            <param name="argument">The string argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and contains one or more characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotEmpty(Dawn.Guard.ArgumentInfo{System.String}@,System.String)">
+            <summary>Requires the argument to have a non-empty string value.</summary>
+            <param name="argument">The string argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and does not contain any characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.WhiteSpace(Dawn.Guard.ArgumentInfo{System.String}@,System.Func{System.String,System.String})">
+            <summary>
+                Requires the argument to have a string value that
+                consists only of white-space characters.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c> and
+                contains one or more characters that are not white-space.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotWhiteSpace(Dawn.Guard.ArgumentInfo{System.String}@,System.Func{System.String,System.String})">
+            <summary>
+                Requires the argument to have a string value that
+                does not consist only of white-space characters.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and contains only of white-space characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.MinLength(Dawn.Guard.ArgumentInfo{System.String}@,System.Int32,System.Func{System.String,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a string value that contains
+                at least the specified number of characters.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="minLength">
+                The minimum number of characters allowed in the argument value.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c> and
+                contains less than the specified number of characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.MaxLength(Dawn.Guard.ArgumentInfo{System.String}@,System.Int32,System.Func{System.String,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a string value that contains
+                no more than the specified number of characters.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="maxLength">
+                The maximum number of characters allowed in the argument value.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c> and
+                contains more than the specified number of characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.LengthInRange(Dawn.Guard.ArgumentInfo{System.String}@,System.Int32,System.Int32,System.Func{System.String,System.Int32,System.Int32,System.String})">
+            <summary>
+                Requires the argument to have a value whose length
+                is between the specified minimum and maximum values.
+            </summary>
+            <param name="argument">The comparable argument.</param>
+            <param name="minLength">
+                The minimum number of characters allowed in the argument value.
+            </param>
+            <param name="maxLength">
+                The maximum number of characters allowed in the argument value.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and contains either less than <paramref name="minLength" />
+                or more than <paramref name="maxLength" /> number of characters.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Equal(Dawn.Guard.ArgumentInfo{System.String}@,System.String,System.StringComparison,System.Func{System.String,System.String,System.String})">
+            <summary>
+                Requires the string argument to have a value that is equal
+                to another string when compared by the specified rules.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="other">The string to compare the argument value to.</param>
+            <param name="comparison">
+                The rules that specify how the strings will be compared.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not equal to
+                <paramref name="other" /> by the comparison rules
+                specified in <paramref name="comparison" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotEqual(Dawn.Guard.ArgumentInfo{System.String}@,System.String,System.StringComparison,System.Func{System.String,System.String})">
+            <summary>
+                Requires the string argument to have a value that is different
+                than another string when compared by the specified rules.
+            </summary>
+            <param name="argument">The string argument.</param>
+            <param name="other">The string to compare the argument value to.</param>
+            <param name="comparison">
+                The rules that specify how the strings will be compared.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is equal to
+                <paramref name="other" /> by the comparison rules
+                specified in <paramref name="comparison" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.StringEqualityComparer(System.StringComparison)">
+            <summary>
+                Returns the string comparer that is most
+                relevant to the specified enumeration value.
+            </summary>
+            <param name="comparison">
+                An enumeration value that specifies how to compare two strings.
+            </param>
+            <returns>A string equality comparer.</returns>
+        </member>
+        <member name="M:Dawn.Guard.Type``1(Dawn.Guard.ArgumentInfo{System.Object}@,System.Func{System.Object,System.String})">
+            <summary>
+                Requires the argument to have a value that is
+                an instance of the specified generic type.
+            </summary>
+            <typeparam name="T">
+                The type that the argument's value should be an instance of.
+            </typeparam>
+            <param name="argument">The object argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not an
+                instance of type <typeparamref name="T" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotType``1(Dawn.Guard.ArgumentInfo{System.Object}@,System.Func{``0,System.String})">
+            <summary>
+                Requires the argument to have a value that is
+                not an instance of the specified generic type.
+            </summary>
+            <typeparam name="T">
+                The type that the argument's value should not be an instance of.
+            </typeparam>
+            <param name="argument">The argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is an
+                instance of type <typeparamref name="T" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Type(Dawn.Guard.ArgumentInfo{System.Object}@,System.Type,System.Func{System.Object,System.Type,System.String})">
+            <summary>
+                Requires the argument to have a value that
+                is an instance of the specified type.
+            </summary>
+            <param name="argument">The object argument.</param>
+            <param name="type">
+                The type that the argument's value should be an instance of.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not an instance
+                of the type represented by <paramref name="type" />.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.NotType(Dawn.Guard.ArgumentInfo{System.Object}@,System.Type,System.Func{System.Object,System.Type,System.String})">
+            <summary>
+                Requires the argument to have a value that
+                is not an instance of the specified type.
+            </summary>
+            <param name="argument">The argument.</param>
+            <param name="type">
+                The type that the argument's value should not be an instance of.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns>A new <see cref="T:Dawn.Guard.ArgumentInfo`1" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is an instance
+                of the type represented by <paramref name="type" />.
+            </exception>
+        </member>
+        <member name="T:Dawn.Guard.TypeInfo`1">
+            <summary>Provides cached utilities for <typeparamref name="T" />.</summary>
+            <typeparam name="T">The type.</typeparam>
+        </member>
+        <member name="F:Dawn.Guard.TypeInfo`1.CanBeInitializedFrom">
+            <summary>
+                A function that determines whether the specified object
+                can be converted to type <typeparamref name="T" />.
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.TypeInfo`1.InitCanBeInitializedFrom">
+            <summary>Initializes <see cref="M:Dawn.Guard.Contains``2(Dawn.Guard.ArgumentInfo{``0}@,``1@,System.Func{``0,``1,System.String})" />.</summary>
+            <returns>
+                A function that determines whether the specified object
+                can be converted to type <typeparamref name="T" />.
+            </returns>
+        </member>
+        <member name="T:Dawn.Guard.TypeInfo">
+            <summary>Provides non-generic, cached utilities for specified types.</summary>
+        </member>
+        <member name="F:Dawn.Guard.TypeInfo.locker">
+            <summary>
+                The locker that synchronizes access to
+                <see cref="F:Dawn.Guard.TypeInfo.canBeConvertedTo" />.
+            </summary>
+        </member>
+        <member name="F:Dawn.Guard.TypeInfo.canBeConvertedTo">
+            <summary>
+                The functions that determine whether a specified object can
+                be converted to the type that the function is mapped to.
+            </summary>
+        </member>
+        <member name="M:Dawn.Guard.TypeInfo.CanBeConvertedTo(System.Object,System.Type)">
+            <summary>
+                Determines whether an object can be converted
+                to an instance of the specified type.
+            </summary>
+            <param name="obj">The object to check.</param>
+            <param name="targetType">The type to check.</param>
+            <returns>
+                <c>true</c>, if <paramref name="obj" /> can be converted
+                to an instance of <paramref name="targetType" />.
+            </returns>
+            <remarks>
+                Calls <see cref="F:Dawn.Guard.TypeInfo`1.CanBeInitializedFrom" />.
+            </remarks>
+        </member>
+        <member name="F:Dawn.Guard.HttpUriScheme">
+            <summary>The URI scheme for Hypertext Transfer Protocol (HTTP).</summary>
+        </member>
+        <member name="F:Dawn.Guard.HttpsUriScheme">
+            <summary>The URI scheme for Secure Hypertext Transfer Protocol (HTTPS).</summary>
+        </member>
+        <member name="M:Dawn.Guard.Absolute(Dawn.Guard.ArgumentInfo{System.Uri}@,System.Func{System.Uri,System.String})">
+            <summary>Requires the argument value to be an absolute URI.</summary>
+            <param name="argument">The URI argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not
+                <c>null</c> and is not an absolute URI.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Relative(Dawn.Guard.ArgumentInfo{System.Uri}@,System.Func{System.Uri,System.String})">
+            <summary>Requires the argument value to be a relative URI.</summary>
+            <param name="argument">The URI argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not
+                <c>null</c> and is not a relative URI.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Scheme(Dawn.Guard.ArgumentInfo{System.Uri}@,System.String,System.Func{System.Uri,System.String,System.String})">
+            <summary>
+                Requires the argument to have an absolute
+                URI with the specified scheme.
+            </summary>
+            <param name="argument">The URI argument.</param>
+            <param name="scheme">The URI scheme to compare.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and does not have the specified scheme.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Http(Dawn.Guard.ArgumentInfo{System.Uri}@,System.Func{System.Uri,System.String})">
+            <summary>
+                Requires the argument to have an absolute
+                URI with the HTTP or HTTPS scheme.
+            </summary>
+            <param name="argument">The URI argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and its scheme is neither HTTP nor HTTPS.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Http(Dawn.Guard.ArgumentInfo{System.Uri}@,System.Boolean,System.Func{System.Uri,System.String})">
+            <summary>
+                Requires the argument to have an absolute
+                URI with the HTTP or HTTPS scheme.
+            </summary>
+            <param name="argument">The URI argument.</param>
+            <param name="allowHttps">
+                Pass <c>true</c> to allow both the HTTP and HTTPS schemes
+                or <c>false</c> to allow only the HTTP scheme.
+            </param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and does not have one of the required schemes.
+            </exception>
+        </member>
+        <member name="M:Dawn.Guard.Https(Dawn.Guard.ArgumentInfo{System.Uri}@,System.Func{System.Uri,System.String})">
+            <summary>
+                Requires the argument to have an absolute URI with the HTTPS scheme.
+            </summary>
+            <param name="argument">The URI argument.</param>
+            <param name="message">
+                The factory to initialize the message of the exception that
+                will be thrown if the precondition is not satisfied.
+            </param>
+            <returns><paramref name="argument" />.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="argument" /> value is not <c>null</c>
+                and does not have the HTTPS scheme.
+            </exception>
+        </member>
+    </members>
+</doc>
