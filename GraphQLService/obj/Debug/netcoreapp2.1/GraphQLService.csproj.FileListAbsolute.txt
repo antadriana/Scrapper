@@ -11,3 +11,4 @@ C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1
 C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.RazorTargetAssemblyInfo.cache
 C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.dll
 C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.pdb
+C:\Users\Adriana\Desktop\SeleniumScrapper\GraphQLService\obj\Debug\netcoreapp2.1\GraphQLService.csprojAssemblyReference.cache
