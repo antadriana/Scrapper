@@ -49,6 +49,14 @@ namespace GraphQLService
             services.AddScoped<InfoSchema>();
             services.AddGraphQL()
                  .AddGraphTypes(ServiceLifetime.Scoped);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             var spp = services.BuildServiceProvider();
             services.AddSingleton<ISchema>(new InfoSchema(new FuncDependencyResolver(type => spp.GetService(type))));
@@ -68,12 +76,14 @@ namespace GraphQLService
                 app.UseHsts();
             }
 
-          //  app.UseHttpsRedirection();
+            //  app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
             app.UseMvc();
             app.UseGraphQL<InfoSchema>();
             app.UseGraphiQl(GraphQlPath);
             app.UseGraphQLPlayground
                (new GraphQLPlaygroundOptions());
+            
         }
     }
 }
