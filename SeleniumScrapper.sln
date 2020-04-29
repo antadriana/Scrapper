@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumScrapper", "Seleniu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rummqListener", "rummqListener\rummqListener.csproj", "{F7A68F4B-2907-4B61-BD41-14AB7F5C056D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLService", "GraphQLService\GraphQLService.csproj", "{63B1C70F-BBEA-4089-8D6B-DCDC68CCA70A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLService", "GraphQLService\GraphQLService.csproj", "{63B1C70F-BBEA-4089-8D6B-DCDC68CCA70A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient", "WpfClient\WpfClient.csproj", "{D2B3A337-6CC9-4FDF-BFAB-57F65FC7FD2A}"
 EndProject
