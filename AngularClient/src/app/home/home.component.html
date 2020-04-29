@@ -1,0 +1,27 @@
+<p>List Of News</p>
+
+<div *ngIf="loading">
+  Loading...
+</div>
+<div *ngIf="error">
+  Error Occurred :(
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Like</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let info of infos">
+      <th scope="row">{{ info.name }}</th>
+      <td>{{info.price}}</td>
+      <td>{{info.like}}</td>
+      <td><button (click)="updateInfo(true, info)">Like</button></td>
+      <td><button (click)="updateInfo(false, info)">Dislike</button></td>
+    </tr>
+  </tbody>
+</table>
